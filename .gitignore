@@ -1,0 +1,12 @@
+*.idea
+*.iml
+/target/
+/build/
+/.gradle/
+dependency-reduced-pom.xml
+dump.rdb
+.classpath
+.project
+bin
+
+node_modules
