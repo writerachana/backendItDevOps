@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: stedi-rchanakumbhakar-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stedi-rchanakumbhakar-dev
+  template:
+    metadata:
+      labels:
+        app: stedi-rchanakumbhakar-dev
+    spec:
+      containers:
+        - name: stedi-rchanakumbhakar-dev
+          image: gcr.io/cheese-empanadas/rachana-stedi-api
+          env:
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: redis-secrets-prod
+                  key: REDIS_PASS
+            - name: REDIS_HOST
+              value: "redis-secrets-prod"
+            - name: REDIS_PORT
+              value: "6379"
+            - name: REDIS_DB
+              value: "0"
+            - name: KAFKA_BROKER
+              value: "localhost:9092"
+          ports:
+            - containerPort: 443
+          resources:
+            limits:
+              cpu: ".5"
+              memory: "500Mi"
+            requests:
+              cpu: ".25"
+              memory: "250Mi"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 4567
+            initialDelaySeconds: 3
+            periodSeconds: 3
+
