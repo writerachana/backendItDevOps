@@ -20,7 +20,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: redis-secrets-prod
-                  key: REDIS_PASS
+                  key: REDIS_PASSWORD
             - name: REDIS_HOST
               value: "redis-secrets-prod"
             - name: REDIS_PORT
@@ -42,6 +42,6 @@ spec:
             httpGet:
               path: /
               port: 4567
-            initialDelaySeconds: 3
+            initialDelaySeconds: 10
             periodSeconds: 3
 
