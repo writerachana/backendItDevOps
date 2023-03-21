@@ -19,7 +19,7 @@ spec:
             - name: REDIS_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: redis-secrets-prod
+                  name: redis-secrets-rachana
                   key: REDIS_PASSWORD
             - name: REDIS_HOST
               value: "redis-secrets-prod"
