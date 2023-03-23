@@ -45,3 +45,42 @@ spec:
             initialDelaySeconds: 10
             periodSeconds: 3
 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: stedi-rachana-nodeport
+spec:
+  selector:
+    app: stedi-rachanakumbhakar-dev
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 4567
+---
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: stedi-rachana-certificate
+spec:
+  domains:
+    - rachana.cit262.com
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: stedi-rachana-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: stedi-rachana-public
+    networking.gke.io/managed-certificates: stedi-rachana-certificate
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: stedi-rachana-nodeport
+            port:
+              number: 80
