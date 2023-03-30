@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata: 
-  name: stedi-rchanakumbhakar-dev
+  name: stedi-rachanakumbhakar-dev
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: stedi-rchanakumbhakar-dev
+      app: stedi-rachanakumbhakar-dev
   template:
     metadata:
       labels:
-        app: stedi-rchanakumbhakar-dev
+        app: stedi-rachanakumbhakar-dev
     spec:
       containers:
-        - name: stedi-rchanakumbhakar-dev
+        - name: stedi-rachanakumbhakar-dev
           image: gcr.io/cheese-empanadas/rachana-stedi-api
           env:
             - name: REDIS_PASSWORD
